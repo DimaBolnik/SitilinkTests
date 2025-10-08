@@ -1,22 +1,25 @@
 package ru.bolnik.config;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.BeforeAll;
 
 public class TestBase {
 
-    @BeforeAll
-    static void setup() {
-        Configuration.baseUrl = "https://www.citilink.ru";
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";
-        Configuration.pageLoadStrategy = "normal";
-        Configuration.timeout = 5000;
+    public static TestConfig config;
 
-        SelenideLogger.addListener("allure", new AllureSelenide()
-                .screenshots(true)
-                .savePageSource(false));
+    @BeforeAll
+    static void setupAll() {
+
+        // Инициализация конфигурации через Owner
+        config = ConfigFactory.create(TestConfig.class);
+
+        // Настройки Selenide берутся из Owner
+        // Значения могут быть переопределены через системные свойства (-D)
+        Configuration.baseUrl = config.baseUrl();
+        Configuration.browser = config.browser();
+        Configuration.browserSize = config.browserSize();
+        Configuration.pageLoadStrategy = config.pageLoadStrategy();
+        Configuration.timeout = config.timeout();
     }
 }
