@@ -15,6 +15,9 @@ public interface TestConfig extends Config {
     @Key("user.password")
     String password();
 
+    @Key("user.name")
+    String userName();
+
     @Key("browser")
     String browser();
 
@@ -24,9 +27,13 @@ public interface TestConfig extends Config {
     @Key("page.load.strategy")
     String pageLoadStrategy();
 
-    @Key("timeout")
-    int timeout();
-
     @Key("search.query")
     String searchQuery();
+
+    // ❌ некорректные данные для негативной авторизации
+    @Key("user.wrong.email")
+    String wrongEmail();
+
+    @Key("user.wrong.password")
+    String wrongPassword();
 }
