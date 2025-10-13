@@ -1,6 +1,9 @@
 package ru.bolnik.pages;
 
+import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -76,8 +79,8 @@ public class CartPage {
     @Step("Проверяем, что корзина пуста")
     public void checkCartIsEmpty() {
         step("Убеждаемся, что отображается сообщение 'В корзине нет товаров'", () -> {
-            $$("span").findBy(text("В корзине нет товаров"))
-                    .shouldBe(visible);
+            $$("span").findBy(Condition.text("В корзине нет товаров"))
+                    .shouldBe(Condition.visible, Duration.ofSeconds(10));
         });
     }
 }
