@@ -7,8 +7,12 @@ import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.MutableCapabilities;
 import ru.bolnik.config.TestConfig;
 import ru.bolnik.pages.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
@@ -31,10 +35,21 @@ public class TestBase {
 
         // Настройки Selenide берутся из Owner
         // Значения могут быть переопределены через системные свойства (-D)
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         Configuration.baseUrl = config.baseUrl();
         Configuration.browser = config.browser();
         Configuration.browserSize = config.browserSize();
-        Configuration.pageLoadStrategy = config.pageLoadStrategy();
+
+        // capabilities для Selenoid
+        MutableCapabilities capabilities = new MutableCapabilities();
+        capabilities.setCapability("browserName", config.browser());
+
+        Map<String, Object> selenoidOptions = new HashMap<>();
+        selenoidOptions.put("enableVNC", true);
+        selenoidOptions.put("enableVideo", true);
+        capabilities.setCapability("selenoid:options", selenoidOptions);
+
+        Configuration.browserCapabilities = capabilities;
 
         // 📸 Подключаем Allure-listener для логов и скриншотов
         SelenideLogger.addListener("AllureSelenide",
