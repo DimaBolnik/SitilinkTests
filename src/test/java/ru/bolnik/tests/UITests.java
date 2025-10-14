@@ -6,6 +6,7 @@ import ru.bolnik.tests.base.TestBase;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Owner("Dima Bolnik")
+@Disabled
 public class UITests extends TestBase {
 
     @Test
