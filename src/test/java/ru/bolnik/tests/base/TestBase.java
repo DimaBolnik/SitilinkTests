@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.screenshot;
 
 public class TestBase {
 
@@ -73,15 +72,7 @@ public class TestBase {
 
 
     @AfterEach
-    public void closeBrowserAndTakeScreenshot() {
-        try {
-            // Сделать скриншот страницы перед закрытием браузера
-            String screenshotPath = screenshot("last-test-screenshot"); // сохраняется в target/screenshots/
-            System.out.println("Screenshot saved: " + screenshotPath);
-        } catch (Exception e) {
-            System.err.println("Не удалось сделать скриншот: " + e.getMessage());
-        } finally {
-            closeWebDriver();
-        }
+    public void closeBrowser() {
+        closeWebDriver();
     }
 }
