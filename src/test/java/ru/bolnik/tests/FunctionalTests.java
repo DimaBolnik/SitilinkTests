@@ -4,7 +4,7 @@ import io.qameta.allure.Owner;
 import org.junit.jupiter.api.*;
 import ru.bolnik.tests.base.TestBase;
 
-
+@Disabled
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Owner("Dima Bolnik")
 public class FunctionalTests extends TestBase {

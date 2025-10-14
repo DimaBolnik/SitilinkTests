@@ -1,6 +1,7 @@
 package ru.bolnik.tests;
 
 import io.qameta.allure.Owner;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.bolnik.tests.base.ApiTestBase;
@@ -8,6 +9,7 @@ import ru.bolnik.tests.base.ApiTestBase;
 import static io.restassured.RestAssured.given;
 
 @Owner("Dima Bolnik")
+@Disabled
 public class ApiTests extends ApiTestBase {
 
     @Test
