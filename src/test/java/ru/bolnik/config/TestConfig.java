@@ -15,7 +15,7 @@ public interface TestConfig extends Config {
     @Key("user.password")
     String password();
 
-    @Key("user.name")
+    @Key("name")
     String userName();
 
     @Key("browser")
