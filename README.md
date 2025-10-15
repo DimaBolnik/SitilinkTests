@@ -117,12 +117,12 @@ cd SitilinkTests
 
 3. **Запуск тестов локально (remote=off):**
 ```powershell
-mvn clean test -Duser.email="<your_login>" -Duser.password="<your_password>" -Dremote=off
+mvn clean test -D"user.email"="<your_email>" -D"user.password"="<your_password>" -Dremote=off
 ```
 
 4. **Запуск тестов на удалённом сервере Selenoid (remote=on):**
 ```powershell
-mvn clean test -Duser.email="<your_login>" -Duser.password="<your_password>" -Dremote=on
+mvn clean test -D"user.email"="<your_email>" -D"user.password"="<your_password>" -Dremote=on
 ```
 
 5. **Генерация Allure отчёта:**
