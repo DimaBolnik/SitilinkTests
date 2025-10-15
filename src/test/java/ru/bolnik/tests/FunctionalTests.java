@@ -1,16 +1,17 @@
 package ru.bolnik.tests;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.*;
 import ru.bolnik.tests.base.TestBase;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Owner("Dima Bolnik")
+@Epic("Functional Tests")
+@DisplayName("Functional Tests")
 public class FunctionalTests extends TestBase {
 
 
     @Test
-    @Order(1)
     @DisplayName("CT-T8: Изменение количества товара в корзине")
     public void changeProductQuantityInCartTest() {
         homePage.openPage();
@@ -25,7 +26,6 @@ public class FunctionalTests extends TestBase {
     }
 
     @Test
-    @Order(2)
     @DisplayName("CT-T9: Удаление товара из корзины")
     public void removeProductFromCartTest() {
         homePage.openPage();
@@ -40,7 +40,6 @@ public class FunctionalTests extends TestBase {
     }
 
     @Test
-    @Order(3)
     @DisplayName("CT-T10: Авторизация с некорректным логином/паролем")
     public void invalidLoginTest() {
         homePage.openPage();
@@ -51,7 +50,6 @@ public class FunctionalTests extends TestBase {
     }
 
     @Test
-    @Order(4)
     @DisplayName("CT-T6: Добавление товара в избранное")
     public void addProductToFavoritesTest() {
         homePage.openPage();

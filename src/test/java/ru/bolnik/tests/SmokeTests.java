@@ -1,16 +1,16 @@
 package ru.bolnik.tests;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.*;
 import ru.bolnik.tests.base.TestBase;
 
-@Disabled
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Owner("Dima Bolnik")
+@Epic("Smoke Tests")
+@DisplayName("Smoke Tests")
 public class SmokeTests extends TestBase {
 
     @Test
-    @Order(1)
     @DisplayName("CT-T1: Поиск товара в каталоге")
     public void searchProductTest() {
         homePage.openPage();
@@ -19,7 +19,6 @@ public class SmokeTests extends TestBase {
     }
 
     @Test
-    @Order(2)
     @DisplayName("CT-T2: Добавление товара в корзину")
     public void addToCartTest() {
         homePage.openPage();
@@ -33,7 +32,6 @@ public class SmokeTests extends TestBase {
     }
 
     @Test
-    @Order(3)
     @DisplayName("CT-T3: Авторизация пользователя")
     public void loginTest() {
         homePage.openPage();
@@ -44,7 +42,6 @@ public class SmokeTests extends TestBase {
     }
 
     @Test
-    @Order(4)
     @DisplayName("CT-T5: Оформление заказа без оплаты")
     public void checkoutTest() {
         homePage.openPage();
