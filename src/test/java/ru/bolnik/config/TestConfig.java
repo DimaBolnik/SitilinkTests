@@ -36,4 +36,10 @@ public interface TestConfig extends Config {
 
     @Key("user.wrong.password")
     String wrongPassword();
+
+    @Key("remote.url")
+    String remoteUrl();
+
+    @Key("remote")
+    String remote();
 }

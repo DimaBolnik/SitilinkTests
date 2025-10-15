@@ -30,33 +30,37 @@ public class TestBase {
     @BeforeAll
     static void setupAll() {
 
-        // Инициализация конфигурации через Owner
-        config = ConfigFactory.create(TestConfig.class);
+        // Загружаем конфигурацию из config.properties (можно переопределять через -D)
+        config = ConfigFactory.create(TestConfig.class, System.getProperties());
 
-        // Настройки Selenide берутся из Owner
-        // Значения могут быть переопределены через системные свойства (-D)
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        // Основные настройки Selenide
         Configuration.baseUrl = config.baseUrl();
         Configuration.browser = config.browser();
         Configuration.browserSize = config.browserSize();
+        Configuration.pageLoadStrategy = config.pageLoadStrategy();
 
-        // capabilities для Selenoid
-        MutableCapabilities capabilities = new MutableCapabilities();
-        capabilities.setCapability("browserName", config.browser());
+        // Проверяем, включён ли удалённый запуск
+        if ("on".equalsIgnoreCase(config.remote())) {
+            Configuration.remote = config.remoteUrl(); // берём URL Selenoid из properties
 
-        Map<String, Object> selenoidOptions = new HashMap<>();
-        selenoidOptions.put("enableVNC", true);
-        selenoidOptions.put("enableVideo", true);
-        capabilities.setCapability("selenoid:options", selenoidOptions);
+            // 💻 capabilities для удалённого запуска
+            MutableCapabilities capabilities = new MutableCapabilities();
+            capabilities.setCapability("browserName", config.browser());
 
-        Configuration.browserCapabilities = capabilities;
+            Map<String, Object> selenoidOptions = new HashMap<>();
+            selenoidOptions.put("enableVNC", true);
+            selenoidOptions.put("enableVideo", true);
+            capabilities.setCapability("selenoid:options", selenoidOptions);
 
-        // 📸 Подключаем Allure-listener для логов и скриншотов
+            Configuration.browserCapabilities = capabilities;
+        }
+
+        // Подключаем Allure listener
         SelenideLogger.addListener("AllureSelenide",
                 new AllureSelenide()
-                        .screenshots(true)       // делаем скриншоты
-                        .savePageSource(true)    // сохраняем HTML страницы
-                        .includeSelenideSteps(true) // добавляем шаги в Allure
+                        .screenshots(true)
+                        .savePageSource(true)
+                        .includeSelenideSteps(true)
         );
     }
 
